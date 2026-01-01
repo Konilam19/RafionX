@@ -1,0 +1,1107 @@
+<!DOCTYPE html>
+<html lang="el">
+<head> 
+  
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Rafion X — Learn · Research · Build</title>
+  <meta name="description" content="Rafion X: AI-driven STEM learning, focus-mode tools and global research labs for students and mentors." />
+  <meta name="author" content="Rafion Team" />
+  <meta name="theme-color" content="#00161b" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Rafion X — Learn · Research · Build" />
+  <meta property="og:description" content="AI-driven STEM learning, research labs and a global community empowering students." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="/assets/og-image.png" />
+  <meta property="og:url" content="https://rafion.com/" />
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://rafion.com/" />
+
+  <!-- Favicon placeholder (replace with real file) -->
+  <link rel="icon" href="/assets/favicon.ico" type="image/x-icon" />
+
+  <!-- Schema.org -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"Organization",
+    "name":"Rafion X",
+    "url":"https://rafion.example/",
+    "logo":"https://rafion.example/assets/logo.png",
+    "sameAs": ["https://twitter.com/rafion", "https://github.com/rafion"]
+  }
+  </script>
+
+  <!-- GSAP CDN (animation) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.14.0/gsap.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.14.0/ScrollTrigger.min.js" defer></script>
+
+  
+<style>
+
+    :root{
+      --bg:#05070a;
+      --panel:#0e141d;
+      --accent:#00bfff;
+      --muted:#9fb7c4;
+      --card:#0f1720;
+      --light:#eaf7ff;
+      --glass: rgba(255,255,255,0.04);
+      --radius:12px;
+    }
+    *{box-sizing:border-box; margin:0; padding:0;}
+    html,body{height:100%;}
+    body{
+      font-family: Inter, "Segoe UI", Roboto, Arial, sans-serif;
+      background: var(--bg);
+      color:#e9f2f7;
+      overflow-x:hidden;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.45;
+    }
+
+    header{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:18px 36px;
+      background:rgba(0,0,0,0.55);
+      position: fixed;
+      top:0;
+      width: 100%;
+      z-index: 1000;
+      backdrop-filter: blur(6px);
+      border-bottom:1px solid rgba(255,255,255,0.04);
+    }
+    .brand{
+      display:flex; align-items: center; gap: 14px; text-decoration: none;color: inherit;flex-wrap: wrap; text-align: center;align-self: center;
+    }
+    .logo {
+      width: 300px;height: auto;border-radius: 8px;background: linear-gradient(135deg, var(--accent), #0088cc);display: inline-block;flex-shrink: 0;
+    }
+    .brand span{font-weight: 700; letter-spacing: 0.2px}
+
+    nav{display: flex; gap: 18px; align-items: center;}
+    nav a {
+     color: #dfeff7; 
+     text-decoration:none; 
+     margin-left:8px; 
+     font-weight:500; 
+     opacity:0.95;
+    }
+    nav a:hover{ color:var(--accent); }
+
+    .cta-btn{background:var(--accent);color: #021018; border: none; padding: 10px 16px; border-radius: 10px; cursor: pointer; font-weight: 700}
+
+    main{padding-top: 92px;}
+    section { scroll-margin-top: 100px;padding: 40px 8%;}
+
+    /* HERO */
+    .hero{
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 120px 8% 80px;
+      gap: 30px;
+      min-height: 520px;
+    }
+    .hero-content {max-width: 640px;}
+    .hero h1{font-size: 44px; line-height: 1.02; color: var(--light);margin-bottom: 18px; }
+    .hero h1 strong {color: var(--accent)}
+    .hero p { font-size: 18px; color: #cfeaf8;margin-bottom: 22px;}
+    .hero-actions{display: flex; gap: 12px; align-items: center;}
+    .hero-visual{width: 48%; max-width: 560px;}
+    .hero-visual img{width: 100%; border-radius: 16px; box-shadow: 0 20px 60px rgba(0,191,255,0.12); transform: perspective(1000px) rotateY(-6deg); transition: transform 0.7s}
+    .hero-visual img:hover{transform: perspective(1000px) rotateY(0) scale(1.02)}
+
+    /* TEAM */
+    .team-wrap{max-width: 1200px;margin: 80px auto}
+    .grid{display: grid;grid-template-columns: repeat(auto-fit,minmax(240px,1fr));gap: 28px;}
+    .card{
+      background: linear-gradient(180deg, rgba(255,255,255,0.015), rgba(255,255,255,0.01));
+      border-radius: 14px;
+      padding: 22px;
+      min-height: 380px;
+      box-shadow: 0 18px 40px rgba(2,20,40,0.6);
+      border: 1px solid rgba(0,191,255,0.03);
+      transition: transform .28s, box-shadow .28s;
+      position: relative;
+      overflow: hidden;
+      align-self: center;
+    }
+    .card:hover{ transform: translateY(-10px); box-shadow: 0 30px 80px rgba(0,128,200,0.05);}
+    .avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  display: block;
+  margin: 0 auto 14px;
+  border: 3px solid rgba(0,191,255,0.25);
+  object-fit: cover;
+  background-color: #0b0f14;
+  background-position: center;
+  background-size: cover;
+  box-shadow: 0 0 12px rgba(0,191,255,0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.avatar:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 18px rgba(0,191,255,0.35);
+}
+    .card h4{text-align:center;font-size:18px;color:#f4fbff;margin:8px 0;}
+    .card .role{text-align:center;color:var(--accent);font-weight:600;margin-bottom:12px;}
+    .card .bio-wrap{max-width:320px;margin:0 auto;text-align:left;color:#b7d7e6;font-size:14px;}
+
+    /* LEARN MORE */
+    .learn-more{max-width: 1200px;margin: 60px auto;}
+    .section-title{text-align: center; color: var(--accent); font-size: 28px; margin-bottom: 12px;}
+    .section-text{text-align:center;color:#cfeaf8;max-width:900px;margin:0 auto 30px;}
+    .program-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:22px;}
+    .program-card{background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));border-radius:12px;padding:20px;border:1px solid rgba(0,191,255,0.05);text-align:center;cursor:pointer;transition: transform .25s ease, box-shadow .25s;}
+    .program-card:hover{transform:translateY(-8px);box-shadow:0 14px 40px rgba(0,191,255,0.12);}
+
+    /* RESEARCH VIDEO */
+    .research{position:relative;margin:60px 0;}
+    .background-video{width:100%;height:420px;object-fit:cover;border-radius:12px;}
+    .research .overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0.35),rgba(0,0,0,0.45));display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;color:#e9f2f7;padding:30px;border-radius:12px;}
+
+    /* COUNTERS */
+    .stats{display:flex;justify-content:center;gap:60px;margin:40px 0;flex-wrap:wrap;}
+    .counter{font-size:40px;color:var(--accent);font-weight:800;}
+    .label{color:var(--muted);text-align:center;}
+
+    /* COMMUNITY GALLERY */
+    .gallery{display:flex;justify-content:center;gap:18px;flex-wrap:wrap;}
+    .gallery img{width:300px;border-radius:12px;object-fit:cover;filter:brightness(0.9);transition:filter .25s;}
+    .gallery img:hover{filter:brightness(1);}
+
+    /* STORY */
+    .story{max-width:900px;margin:40px auto;color:#cfeaf8;}
+
+    /* CONTACT FORM */
+    .contact form{max-width:760px;margin:20px auto;padding:20px;border-radius:12px;background:linear-gradient(180deg,rgba(255,255,255,0.01),transparent);border:1px solid rgba(255,255,255,0.02);}
+    .form-row{display:flex;gap:12px;}
+    .form-row .field{flex:1;}
+    input,textarea,select{width:100%;padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.06);background:transparent;color:inherit;}
+    textarea{min-height:120px;}
+    .form-actions{display:flex;justify-content:flex-end;margin-top:12px;}
+
+    /* MODALS */
+    .modal{display:none;position:fixed;z-index:2000;left:0;top:0;width:100%;height:100%;background:rgba(0,0,0,0.6);backdrop-filter:blur(6px);justify-content:center;align-items:center;padding:24px;}
+    .modal[aria-hidden="false"]{display:flex;}
+    .modal-content{background:var(--card);padding:24px;border-radius:12px;max-width:720px;width:100%;color:#e9f2f7;position:relative;text-align:left;}
+    .modal-close{position:absolute;top:8px;right:12px;font-size:22px;color:var(--accent);cursor:pointer;border:none;background:none;}
+
+    footer{margin-top:60px;text-align:center;padding:30px;color:#9fb3bf;background:#040609;border-top:1px solid rgba(255,255,255,0.03);}
+
+    @media (max-width:900px){.hero{flex-direction:column-reverse;padding:90px 6% 40px}.hero-visual{width:100%}.hero h1{font-size:32px}.avatar{width:96px;height:96px}.hero p{font-size:16px;}}
+    @media (max-width:480px){header{padding:12px 16px}nav{display:none}.hero{padding:80px 5% 30px}.card{padding:16px}.gallery img{width:100%;max-width:320px;}}
+
+:root{
+--bg:#05070a;
+--panel:#0d141a;
+--card:#0e1720;
+--accent:#00bfff;
+--accent-2:#00ffd5;
+--muted:#9fb7c4;
+--glass: rgba(255,255,255,0.03);
+--radius:14px;
+--max-width:1200px;
+--text:#eaf7ff;
+--soft:#cfeaf8;
+--shadow: 0 18px 48px rgba(0,0,0,0.6);
+--gap:36px; /* increased breathing room */
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{
+font-family: Inter, "Segoe UI", Roboto, Arial, sans-serif;
+background:
+radial-gradient(900px 400px at 15% 10%, rgba(0,191,255,0.03), transparent 8%),
+radial-gradient(700px 300px at 90% 80%, rgba(0,255,213,0.02), transparent 6%),
+var(--bg);
+color:var(--text);
+-webkit-font-smoothing:antialiased;
+-moz-osx-font-smoothing:grayscale;
+line-height:1.55;
+overflow-x:hidden;
+min-width:320px;
+}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;height:auto;display:block}
+
+    /* ---------- Header ---------- */
+header{
+position:fixed;left:0;right:0;top:0;height:72px;display:flex;align-items:center;z-index:1400;
+backdrop-filter: blur(6px);
+background:linear-gradient(180deg, rgba(2,6,10,0.6), rgba(2,6,10,0.35));
+border-bottom:1px solid rgba(255,255,255,0.03);
+padding:10px 18px;
+}
+.container{max-width:var(--max-width);margin:0 auto;width:100%;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.brand{display:flex;align-items:center;gap:12px}
+.logo-box{width:48px;height:48px;border-radius:12px;background:linear-gradient(135deg,var(--accent),#0077aa);display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 8px 24px rgba(0,191,255,0.06)}
+.brand h1{font-size:16px;margin:0;font-weight:800;line-height:1}
+.brand small{display:block;color:var(--muted);font-weight:600;font-size:11px;margin-top:2px}
+
+nav.primary{display:flex;gap:18px;align-items:center}
+nav.primary a{color:var(--soft);padding:8px 10px;border-radius:8px;font-weight:600;transition:all .16s}
+nav.primary a:hover, nav.primary a:focus{background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#00161b;box-shadow:0 10px 30px rgba(0,191,255,0.06)}
+.cta{display:flex;gap:10px;align-items:center}
+.btn{padding:8px 14px;border-radius:10px;font-weight:800;cursor:pointer;border:none}
+.btn-primary{background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#00161b;box-shadow:0 14px 40px rgba(0,191,255,0.06)}
+.btn-ghost{background:transparent;color:var(--soft);border:1px solid rgba(255,255,255,0.04);padding:8px 12px}
+
+/* Hamburger (mobile) */
+.hamburger{display:none;width:44px;height:44px;border-radius:10px;align-items:center;justify-content:center;background:transparent;border:1px solid transparent}
+.hamburger .bars{width:18px;height:14px;position:relative}
+.hamburger .bars span{position:absolute;height:2px;width:100%;left:0;background:var(--soft);border-radius:2px;transition:all .28s}
+.hamburger .bars span:nth-child(1){top:0}
+.hamburger .bars span:nth-child(2){top:6px}
+.hamburger .bars span:nth-child(3){top:12px}
+
+/* mobile panel */
+.mobile-panel{position:fixed;right:16px;top:72px;width:320px;max-width:88%;display:none;flex-direction:column;gap:10px;padding:12px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.02);box-shadow:0 20px 60px rgba(2,8,20,0.6);z-index:1500}
+.mobile-panel.show{display:flex}
+.mobile-panel a{padding:10px;font-weight:800;border-radius:8px}
+.mobile-panel a:hover{background:rgba(0,191,255,0.04);color:var(--accent)}
+/* ---------- Main / Hero ---------- */
+main{padding-top:92px}
+.hero{
+display:flex;align-items:center;justify-content:space-between;gap:var(--gap);padding:80px 20px 60px;max-width:var(--max-width);margin:0 auto;
+}
+.hero-left{flex:1;max-width:680px}
+.badge{display:inline-block;padding:6px 12px;border-radius:999px;background:linear-gradient(90deg, rgba(0,191,255,0.06), rgba(0,255,213,0.03));color:var(--accent);font-weight:800;margin-bottom:18px;font-size:13px}
+h2{font-size:44px;line-height:1.02;margin-bottom:14px}
+h2 strong{background:linear-gradient(90deg,var(--accent),var(--accent-2));-webkit-background-clip:text;background-clip:text;color:transparent}
+p.lead{color:var(--soft);font-size:18px;margin-bottom:20px;max-width:640px}
+.hero-actions{display:flex;gap:12px;align-items:center}
+.mockup{
+width:540px;max-width:48%;min-width:320px;border-radius:20px;padding:18px;background:linear-gradient(180deg, rgba(255,255,255,0.018), rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.02);box-shadow:var(--shadow);position:relative;overflow:hidden;transform-origin:center center;
+}
+.mockup img{border-radius:12px;display:block;max-width:100%;height:auto}
+/* floating shapes container */
+.floating-shapes{position:absolute;inset:0;pointer-events:none;z-index:0;overflow:visible}
+
+/* glow ring (subtle) */
+.glow-ring{position:absolute;width:420px;height:420px;border-radius:50%;filter:blur(56px);opacity:0.12;right:-10%;top:-20%;background:conic-gradient(from 90deg at 50% 50%, rgba(0,191,255,0.6), rgba(0,255,213,0.25), rgba(0,191,255,0.6));transform-origin:center center}
+/* ---------- Sections ---------- */
+section{padding:calc(var(--gap) + 6px) 20px}
+.section-inner{max-width:var(--max-width);margin:0 auto}
+.section-title{color:var(--accent);font-size:26px;margin-bottom:6px}
+.section-sub{color:var(--soft);margin-bottom:18px;max-width:900px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:28px}
+.card{
+background:linear-gradient(180deg, rgba(255,255,255,0.015), rgba(255,255,255,0.01));
+border-radius:14px;padding:22px;min-height:280px;border:1px solid rgba(255,255,255,0.02);box-shadow:0 10px 30px rgba(0,0,0,0.55);position:relative;overflow:hidden;transition:transform .28s,box-shadow .28s;
+}
+.card:hover{transform:translateY(-8px);box-shadow:0 30px 80px rgba(0,191,255,0.06)}
+.avatar{width:108px;height:108px;border-radius:50%;margin:0 auto 12px;border:3px solid rgba(0,191,255,0.09);object-fit:cover;background:#071018}
+.role{color:var(--accent);font-weight:800;text-align:center;margin-bottom:8px}
+.bio{color:var(--muted);font-size:14px;text-align:center}
+
+.program-card{padding:18px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.012), rgba(255,255,255,0.008));border:1px solid rgba(0,191,255,0.04);cursor:pointer;transition:transform .3s,box-shadow .3s}
+.program-card:hover{transform:translateY(-8px);box-shadow:0 16px 50px rgba(0,191,255,0.08)}
+
+   /* research video */
+.background-video{width:100%;height:420px;object-fit:cover;border-radius:12px;display:block;border:1px solid rgba(255,255,255,0.02);box-shadow:var(--shadow)}
+.overlay{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:22px;border-radius:12px;pointer-events:none}
+
+    /* counters */
+.stats{display:flex;justify-content:center;gap:48px;margin:10px 0 26px;flex-wrap:wrap}
+.counter{font-size:36px;color:var(--accent);font-weight:800}
+.label{color:var(--muted);text-align:center}
+
+    /* contact */
+.contact form{max-width:760px;margin:16px auto;padding:18px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent);border:1px solid rgba(255,255,255,0.02)}
+.form-row{display:flex;gap:12px;flex-wrap:wrap}
+.field{flex:1;padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.06);background:transparent;color:inherit}
+
+    /* modal */
+.modal{display:none;position:fixed;z-index:1600;left:0;top:0;width:100%;height:100%;background:rgba(0,0,0,0.64);backdrop-filter:blur(6px);justify-content:center;align-items:center;padding:24px}
+.modal[aria-hidden="false"]{display:flex}
+.modal-content{background:var(--card);padding:20px;border-radius:12px;max-width:720px;width:100%;color:var(--text);position:relative;max-height:80vh;overflow:auto;border:1px solid rgba(255,255,255,0.02)}
+.modal-close{position:absolute;top:8px;right:12px;font-size:24px;color:var(--accent);cursor:pointer;background:none;border:none}
+
+    /* sticky CTA (bottom-right) */
+.sticky-cta{position:fixed;right:20px;bottom:20px;z-index:1600;display:flex;gap:8px;align-items:center}
+.sticky-cta .bubble{padding:12px 16px;border-radius:999px;background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#00161b;font-weight:800;box-shadow:0 18px 48px rgba(0,191,255,0.08);cursor:pointer}
+.sticky-cta .help{background:rgba(255,255,255,0.03);padding:10px;border-radius:12px;color:var(--soft);border:1px solid rgba(255,255,255,0.02)}
+
+    /* scroll-to-top */
+.to-top{position:fixed;right:20px;bottom:86px;width:44px;height:44px;border-radius:8px;background:rgba(255,255,255,0.03);display:flex;align-items:center;justify-content:center;border:1px solid rgba(255,255,255,0.02);cursor:pointer;z-index:1600;opacity:0;transform:translateY(12px);transition:all .28s}
+.to-top.show{opacity:1;transform:none}
+footer{margin-top:40px;text-align:center;padding:34px;color:var(--muted);background:linear-gradient(180deg, rgba(0,0,0,0.02), transparent)}
+
+/* responsive */
+@media (max-width:980px){
+nav.primary{display:none}
+.hamburger{display:flex}
+.hero{flex-direction:column-reverse;padding:60px 18px 40px}
+.mockup{max-width:92%;width:92%}
+section{padding:28px 18px}
+.grid{gap:16px}
+}
+@media (max-width:560px){
+  h2{font-size:28px}
+  .badge{font-size:12px}
+  header{height:66px}
+  .floating-shapes{display:none}
+}
+
+    /* keyboard focus visible */
+.user-is-tabbing a:focus, .user-is-tabbing button:focus, .user-is-tabbing [tabindex]:focus{outline:3px solid rgba(0,191,255,0.12);outline-offset:4px;border-radius:8px}
+
+</style>
+</head>
+
+<body>
+  <!-- Loading overlay -->
+  <div id="loading" aria-hidden="false" style="position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:linear-gradient(180deg,rgba(2,6,10,0.92),rgba(2,6,10,0.88));z-index:2000;transition:opacity .4s">
+    <div style="text-align:center;color:var(--soft);">
+      <svg width="56" height="56" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <circle cx="12" cy="12" r="9" stroke="url(#gloading)" stroke-width="2" stroke-linecap="round" />
+        <defs>
+          <linearGradient id="gloading" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#00bfff"/><stop offset="1" stop-color="#00ffd5"/></linearGradient>
+        </defs>
+      </svg>
+      <div style="margin-top:12px;font-weight:700">Rafion — Φορτώνει…</div>
+    </div>
+  </div>
+
+  <!-- Decorative background canvas: lines/dots -->
+  <canvas id="bgCanvas" aria-hidden="true" style="position:fixed;inset:0;width:100%;height:100%;z-index:-1"></canvas>
+<canvas id="hero-canvas"></canvas>
+<script>
+// Full-page particle animation
+const canvas = document.getElementById('hero-canvas');
+const ctx = canvas.getContext('2d');
+let w = canvas.width = window.innerWidth;
+let h = canvas.height = window.innerHeight;
+canvas.style.position = 'fixed';
+canvas.style.top = 0;
+canvas.style.left = 0;
+canvas.style.width = '100%';
+canvas.style.height = '100%';
+canvas.style.zIndex = -1;
+
+const particles = [];
+for(let i=0;i<60;i++){
+  particles.push({x:Math.random()*w,y:Math.random()*h,vx:(Math.random()-0.5)*0.5,vy:(Math.random()-0.5)*0.5,size:1.5+Math.random()*2});
+}
+function animateParticles(){
+  ctx.clearRect(0,0,w,h);
+  for(let i=0;i<particles.length;i++){
+    let p = particles[i];
+    p.x+=p.vx; p.y+=p.vy;
+    if(p.x<0||p.x>w)p.vx*=-1;
+    if(p.y<0||p.y>h)p.vy*=-1;
+    ctx.fillStyle='rgba(0,191,255,0.7)';
+    ctx.beginPath();
+    ctx.arc(p.x,p.y,p.size,0,Math.PI*2);
+    ctx.fill();
+    for(let j=i+1;j<particles.length;j++){
+      let q=particles[j];
+      let dx=p.x-q.x, dy=p.y-q.y, dist=Math.sqrt(dx*dx+dy*dy);
+      if(dist<120){
+        ctx.strokeStyle='rgba(0,191,255,'+(1-dist/120)*0.5+')';
+        ctx.beginPath(); ctx.moveTo(p.x,p.y); ctx.lineTo(q.x,q.y); ctx.stroke();
+      }
+    }
+  }
+  requestAnimationFrame(animateParticles);
+}
+animateParticles();
+window.addEventListener('resize',()=>{w=canvas.width=window.innerWidth; h=canvas.height=window.innerHeight;});
+</script>
+  <!-- Header -->
+  <header role="banner">
+    <div class="container">
+      <a class="brand" href="#home" aria-label="Rafion home">
+        <span class="logo-box" aria-hidden="true">
+          <img src="logo.png">
+          <!-- Inline SVG logo: modern stylized "R" -->
+          <svg width="30" height="30" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true">
+            <defs>
+              <linearGradient id="lg" x1="0" x2="1"><stop offset="0" stop-color="#00bfff"/><stop offset="1" stop-color="#00ffd5"/></linearGradient>
+            </defs>
+            <path d="M16 12h12c6 0 14 3 10 14-3 8-12 9-20 9V12z" fill="url(#lg)" />
+            <path d="M16 48v-36" stroke="rgba(255,255,255,0.06)" stroke-width="3" stroke-linecap="round"/>
+          </svg>
+        </span>
+        <div>
+          <h1 style="margin:0;font-size:15px">Rafion <strong style="color:var(--accent)">X</strong></h1>
+          <small>Learn · Research · Build</small>
+        </div>
+      </a>
+
+      <nav class="primary" role="navigation" aria-label="Main navigation">
+        <a href="#hero">Home</a>
+        <a href="#team">Team</a>
+        <a href="#learn-more">Programs</a>
+        <a href="#research">Research</a>
+        <a href="#community">Community</a>
+        <a href="#contact">Contact</a>
+      </nav>
+
+      <div class="cta">
+        <button class="btn btn-ghost" id="subscribeBtn" aria-label="Subscribe">Subscribe</button>
+        <button class="btn btn-primary" id="contactHeaderBtn">Contact</button>
+        <button class="hamburger" id="hamburgerBtn" aria-expanded="false" aria-controls="mobilePanel" aria-label="Open menu">
+          <span class="bars" aria-hidden="true"><span></span><span></span><span></span></span>
+        </button>
+      </div>
+    </div>
+
+    <!-- mobile panel -->
+    <div id="mobilePanel" class="mobile-panel" role="menu" aria-hidden="true">
+      <a href="#hero" role="menuitem">Home</a>
+      <a href="#team" role="menuitem">Team</a>
+      <a href="#learn-more" role="menuitem">Programs</a>
+      <a href="#research" role="menuitem">Research</a>
+      <a href="#community" role="menuitem">Community</a>
+      <a href="#contact" role="menuitem">Contact</a>
+    </div>
+  </header>
+
+  <main id="home" role="main">
+    <!-- HERO -->
+    <section class="hero" id="hero" aria-labelledby="hero-heading">
+      <div class="floating-shapes" aria-hidden="true">
+        <!-- Background blobs / dots / lines (decorative) -->
+        <svg width="100%" height="100%" viewBox="0 0 1200 700" preserveAspectRatio="xMidYMid slice" style="position:absolute;left:0;top:0;pointer-events:none;opacity:0.6">
+          <defs>
+            <linearGradient id="g1" x1="0" x2="1"><stop offset="0" stop-color="#00bfff"/><stop offset="1" stop-color="#00ffd5"/></linearGradient>
+            <filter id="soft" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="40" /></filter>
+          </defs>
+          <!-- soft blobs -->
+          <circle cx="1050" cy="80" r="180" fill="url(#g1)" filter="url(#soft)" opacity="0.1" />
+          <circle cx="80" cy="120" r="120" fill="#00bfff" filter="url(#soft)" opacity="0.06" />
+          <!-- dots pattern -->
+          <g opacity="0.08" fill="#00ffd5">
+            <circle cx="200" cy="520" r="2"></circle>
+            <circle cx="212" cy="532" r="2"></circle>
+            <circle cx="224" cy="544" r="2"></circle>
+            <circle cx="236" cy="556" r="2"></circle>
+            <circle cx="248" cy="568" r="2"></circle>
+          </g>
+          <!-- techy lines -->
+          <g stroke="#00bfff" stroke-opacity="0.06" stroke-width="1">
+            <path d="M360 40 L520 140 L680 80" stroke-linecap="round" />
+            <path d="M400 120 L560 220 L720 160" stroke-linecap="round" />
+          </g>
+        </svg>
+
+        <!-- Floating thematic icons (inline small svgs) -->
+        <svg style="position:absolute;left:12%;top:8%;width:72px;height:72px;transform-origin:center;" viewBox="0 0 48 48" aria-hidden="true">
+          <g fill="none" stroke="url(#g1)" stroke-width="1.6">
+            <circle cx="24" cy="24" r="6" stroke-opacity="0.9" />
+            <path d="M24 6v8" />
+            <path d="M24 34v8" />
+            <path d="M6 24h8" />
+            <path d="M34 24h8" />
+          </g>
+        </svg>
+
+        <svg style="position:absolute;right:8%;top:22%;width:88px;height:88px;transform-origin:center;" viewBox="0 0 64 64" aria-hidden="true">
+          <defs><linearGradient id="g2" x1="0" x2="1"><stop offset="0" stop-color="#00bfff"/><stop offset="1" stop-color="#00ffd5"/></linearGradient></defs>
+          <g fill="url(#g2)" opacity="0.9">
+            <path d="M32 8c6 0 12 4 12 10 0 6-6 10-12 10s-12-4-12-10c0-6 6-10 12-10z" />
+            <rect x="16" y="34" width="32" height="12" rx="2" />
+          </g>
+        </svg>
+
+        <svg style="position:absolute;left:6%;bottom:6%;width:110px;height:110px;transform-origin:center;" viewBox="0 0 64 64" aria-hidden="true">
+          <g fill="none" stroke="rgba(0,191,255,0.16)" stroke-width="1.6">
+            <circle cx="32" cy="32" r="12"/>
+            <path d="M32 20 L32 8" stroke-opacity="0.9"/>
+            <path d="M44 32 L56 32" stroke-opacity="0.9"/>
+          </g>
+        </svg>
+      </div>
+
+      <div class="hero-left" style="position:relative;z-index:2">
+        <div class="badge" aria-hidden="true">AI • EDUCATION • STEM</div>
+        <h2 id="hero-heading">Shaping the Future of <strong>Learning</strong></h2>
+        <p class="lead">Empowering curious students with research-backed tools — Focus Mode, Learn Feed and Research Labs. Build, measure and iterate faster.</p>
+        <div class="hero-actions" role="group" aria-label="Hero actions">
+          <button class="btn btn-primary" id="learnMoreBtn" aria-controls="learn-more">Learn More</button>
+          <button class="btn btn-ghost" id="demoBtn">Request Demo</button>
+        </div>
+      </div>
+
+      <div class="mockup" aria-hidden="false" style="z-index:2">
+        <div class="glow-ring" aria-hidden="true"></div>
+        <!-- Mockup screenshot placeholder (replace with actual screenshot) -->
+        <img src="mockup.png" alt="Rafion platform mockup" loading="lazy" width="900" height="560">
+        <!-- floating STEM icons around mockup -->
+        <svg viewBox="0 0 64 64" style="position:absolute;left:-24px;bottom:8px;width:64px;height:64px;pointer-events:none;opacity:0.95" aria-hidden="true">
+          <defs><linearGradient id="ic1" x1="0" x2="1"><stop offset="0" stop-color="#00bfff"/><stop offset="1" stop-color="#00ffd5"/></linearGradient></defs>
+          <g fill="url(#ic1)"><path d="M12 44c4-6 12-6 16 0-4 6-12 6-16 0z"/><circle cx="36" cy="16" r="6"/></g>
+        </svg>
+      </div>
+    </section>
+
+    <!-- TEAM -->
+    <section id="team" aria-labelledby="team-title">
+      <div class="section-inner">
+        <h3 id="team-title" class="section-title">Meet the Team</h3>
+        <p class="section-sub" style="text-align: right;">Students and mentors combining curiosity, design and engineering to build real projects.</p>
+
+        <div class="grid" role="list" style="margin-top:18px">
+          <article class="card" role="listitem" aria-labelledby="maria-name">
+            <img class="avatar" src="maria.png" alt="Portrait of Maria-Christina Karakou" loading="lazy">
+            <h4 id="maria-name" style="text-align:center;margin-top:10px">Maria-Christina Karakou</h4>
+            <div class="role">Founder</div>
+            <p class="bio">My fascination with robots began long before I knew what STEM was. While others played with dolls, I built machines out of LEGO, curious about how things worked. That curiosity soon grew into passion—one that led me to robotics, mechatronics, and programming in Arduino and Python. What captivated me most was the precision and logic behind every system, every line of code. To me, STEM is more than science and technology; it’s the art of innovation and problem-solving that turns imagination into reality. I eagerly await to strike new challenges and expand my skill set to the fullest.</p>
+          </article>
+
+          <article class="card" role="listitem" aria-labelledby="agis-name">
+            <img class="avatar" src="agi.jpg" alt="Portrait of Agis Bayias" loading="lazy">
+            <h4 id="agis-name" style="text-align:center;margin-top:10px">Agis Bayias</h4>
+            <div class="role">Designer</div>
+            <p class="bio">Since I was a kid, I've loved figuring out how things work and finding creative ways to make them better. I loved taking things apart, testing ideas, and discovering new ways to make them work. As I grew older, that spirit of exploration turned into a genuine passion for science, technology, and design where creativity meets logic. What inspires me the most is the challenge of turning an idea into reality, something that can truly make an impact. For me, technology is a growing world of innovation, and I am excited to keep discovering where this journey can take me.</p>
+          </article>
+
+          <article class="card" role="listitem" aria-labelledby="giorgos-name">
+            <img class="avatar" src="geo.jpg" alt="Portrait of Giorgos Linardakis" loading="lazy">
+            <h4 id="giorgos-name" style="text-align:center;margin-top:10px">Giorgos Linardakis</h4>
+            <div class="role">Product</div>
+            <p class="bio">Everything started with my video game addiction. I began playing action and puzzle games at a very young age, which sparked my interest in experimenting. The instantaneous feedback to my actions kept me engaged for hours at a time. When I was introduced to the shiny, new world of STEM, it felt only natural to fall in love with it. The endless possibilities -some existing in digital worlds I could create (and accidentally destroy), others brought to life in the real world—were simply too exciting to ignore. I'm eager to explore the depths of this new dimension.</p>
+          </article>
+
+          <article class="card" role="listitem" aria-labelledby="konstantinos-name">
+            <img class="avatar" src="jeez.jpg" alt="Portrait of Konstantinos-Maximos Lambiris" loading="lazy">
+            <h4 id="konstantinos-name" style="text-align:center;margin-top:10px">Konstantinos-Maximos Lambiris</h4>
+            <div class="role">Coder</div>
+            <p class="bio">From a young age, I’ve been fascinated by how machines work, which led me to robotics and programming. I’ve spent years building projects and developing skills in Python, C#, C++, HTML, CSS, and JavaScript, along with hands-on experience in soldering and mechanical builds. A school astrophysics seminar sparked a deep interest in space science, and since then I’ve continued exploring astrophysics through books and research, driven by a passion to understand both mechanical and cosmic systems.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROGRAMS -->
+    <section id="learn-more" aria-labelledby="programs-title">
+      <div class="section-inner">
+        <h3 id="programs-title" class="section-title">Programs & Features</h3>
+        <p class="section-sub" style="margin-left:200px;">Focus Mode, Learn Feed, STEM Community and Research Labs — structured modules that scale with your curiosity.</p>
+
+        <div class="grid" style="margin-top:18px">
+          <div tabindex="0" class="program-card" data-modal="focusModal" role="button" aria-pressed="false" aria-label="Open Focus Mode details">
+            <h4 style="margin-bottom:8px"> FocusMode</h4>
+            <p style="color:var(--muted)">AI-driven sessions that reduce distractions for deep work.</p>
+          </div>
+
+          <div tabindex="0" class="program-card" data-modal="learnModal" role="button" aria-pressed="false">
+            <h4 style="margin-bottom:8px">Learn Feed</h4>
+            <p style="color:var(--muted)">Adaptive learning stream with bite-sized lessons and projects.</p>
+          </div>
+
+          <div tabindex="0" class="program-card" data-modal="stemModal" role="button" aria-pressed="false">
+            <h4 style="margin-bottom:8px">STEM Community</h4>
+            <p style="color:var(--muted)">Collaborate on projects, mentorship and competitions.</p>
+          </div>
+
+          <div tabindex="0" class="program-card" data-modal="researchModal" role="button" aria-pressed="false">
+            <h4 style="margin-bottom:8px">Research Labs</h4>
+            <p style="color:var(--muted)">Experiments merging neuroscience, cognition and AI.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- RESEARCH VIDEO -->
+    <section id="research">
+      <div class="section-inner">
+        <h3 id="research-title" class="section-title">Innovation Through Research</h3>
+        <p class="section-sub"style="margin-left:150px;text-align:center;">Rafion X is an educational technology company created with a simple idea: learning should feel as natural and engaging as using social media. Grounded in research from education, psychology, and digital media, Rafion X responds to major global challenges that shape how people learn and understand the world today.<br><br>
+        In recent years, information has become everywhere, yet real understanding has become harder to achieve. Misinformation spreads rapidly, attention spans are constantly interrupted, and access to high-quality education remains unequal. Social platforms often reward speed and popularity rather than accuracy, while endless scrolling leads to cognitive fatigue and superficial learning. Rafion X was designed as a research-driven response to these challenges.<br><br>
+        Rafion X transforms verified knowledge into short, visual content that explains words, concepts, and facts clearly and simply. Users actively learn by saving concepts, listening to pronunciations, reading examples, and returning daily to build learning streaks. Visual-first design, multilingual content, and AI-powered translations remove language and accessibility barriers, making quality knowledge available to a global audience.<br><br>
+        The innovation of Rafion X lies in combining the familiar structure of social media with scientifically informed learning design. Feeds, short videos, likes, and sharing are redirected toward education, while an AI-powered system personalizes learning based on each user’s interests, level, and progress. Built as a learning ecosystem, Rafion X encourages community participation and shared knowledge, reflecting research that shows learning is deeper and more lasting when it is social. Rafion X aims to redefine everyday digital time, turning curiosity into understanding and distraction into personal growth.
+</p>
+        
+      </div>
+    </section>
+
+    <!-- STATS -->
+    <section id="stats" aria-labelledby="stats-title">
+      <div class="section-inner">
+        <div class="stats" aria-hidden="false">
+          <div>
+            <div class="counter" data-target="25" aria-live="polite">0</div>
+            <div class="label">Projects</div>
+          </div>
+          <div>
+            <div class="counter" data-target="4" aria-live="polite">0</div>
+            <div class="label">Mentors</div>
+          </div>
+          <div>
+            <div class="counter" data-target="40" aria-live="polite">0</div>
+            <div class="label">Members</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- COMMUNITY -->
+    <section id="community">
+      <div class="section-inner">
+        <h3 class="section-title">Our Global Community</h3>
+        <p class="section-sub"style="margin-left:350px;">Thousands of learners exchanging projects, feedback and mentorship.</p>
+  
+          <div style="border-radius:12px;overflow:hidden;border:1px solid rgba(255,255,255,0.02);background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent);padding:12px">
+            <img src="AI.png" alt="AI Conference" loading="lazy">
+          </div>
+          <!--<div class="grid" style="margin-top:14px">
+          <div style="border-radius:12px;overflow:hidden;border:1px solid rgba(255,255,255,0.02);background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent);padding:12px">
+            <img src="ChatGPT Image Dec 19, 2025, 07_00_09 PM.png" alt="Workshop" loading="lazy">
+          </div>
+          <div style="border-radius:12px;overflow:hidden;border:1px solid rgba(255,255,255,0.02);background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent);padding:12px">
+            <img src="ChatGPT Image Dec 19, 2025, 07_12_29 PM.png" alt="Team Collaboration" loading="lazy">
+          </div>-->
+        </div>
+      </div>
+
+    </section>
+
+    <!-- STORY -->
+    <section>
+      <div class="section-inner">
+        <h3 class="section-title">The Story Behind Rafion</h3>
+        <p class="section-sub" style="text-align: center; margin-left: 160px; ">Rafion began as a spark of an idea from a young founder who believed that curiosity could be turned into real-world impact. What started as a plan to join international competitions quickly evolved when she realized that innovation isn’t just about winning—it’s about solving global challenges. Gathering three brilliant minds with diverse skills, the team set out not just to compete in a hackathon, but to build something that lasts. The result was Rafion — a learning platform designed to empower curious minds and tackle three of the world’s most pressing problems through knowledge, creativity, and collaboration. Inspired by a name close to the founder’s heart, Rafion represents a vision where learning becomes a force for change — and where a single idea can grow into something extraordinary.</p>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+       <div class="contact-section">
+    <h2 class="section-title">Contact Us</h2>
+    <div class="contact-item">
+      <i class="fa-regular fa-envelope"></i>
+      <div class="section-sub" style="text-align: center; margin-left: 480px; ">RafionTech@gmail.com</div>
+    </div>
+    <div class="contact-item">
+      
+<i class="fa-solid fa-mobile-screen"></i>
+      <div class="section-sub"style="text-align: center; margin-left:480px; ">+30 69069484 or +30 6946226405</div>
+    </div>
+  </div>
+
+      <!--<div class="section-inner">
+        <h3 class="section-title">Contact Us</h3>
+        <form id="contactForm" action="https://example.com/contact" method="POST" novalidate class="contact" aria-label="Contact form">
+          <div class="form-row">
+            <input class="field" type="text" name="name" placeholder="Your Name" aria-label="Your name" required>
+            <input class="field" type="email" name="email" placeholder="Your Email" aria-label="Your email" required>
+          </div>
+          <textarea class="field" name="message" placeholder="Your Message" aria-label="Your message" required></textarea>
+          <div style="display:flex;justify-content:flex-end;margin-top:12px">
+            <button class="btn btn-primary" type="submit">Send Message</button>
+          </div>
+        </form>
+      </div>-->
+    </section>
+    <div>
+      
+    </div>
+
+    <!-- MODALS -->
+    <div id="focusModal" class="modal" role="dialog" aria-hidden="true" aria-labelledby="focusModalLabel" aria-modal="true">
+      <div class="modal-content">
+        <button class="modal-close" aria-label="Close">&times;</button>
+        <h4 id="focusModalLabel">Focus Mode</h4>
+        <p>Focus Mode is built to fight distraction and mental fatigue. It removes notifications, social noise, and shallow engagement, placing the user in a clean, distraction-free learning environment. For a set time window (e.g. 10–15 minutes), the user focuses on a single topic with curated content only. No endless scrolling, no dopamine traps. Just clear thinking, real understanding, and visible progress. Rafion X doesn’t try to keep users addicted — it helps them leave smarter.</p>
+      </div>
+    </div>
+
+    <div id="learnModal" class="modal" role="dialog" aria-hidden="true" aria-labelledby="learnModalLabel" aria-modal="true">
+      <div class="modal-content">
+        <button class="modal-close" aria-label="Close">&times;</button>
+        <h4 id="learnModalLabel">Learn Feed</h4>
+        <p>The Learn Feed is the core of Rafion X: an Instagram-style stream of knowledge. Instead of trends and meaningless content, users scroll through short, visual learning posts (30–60 seconds) that explain words, concepts, scientific terms, or historical facts. The algorithm rewards depth, not emptiness — saving, revisiting, and understanding matter more than views or likes. Learning becomes effortless, daily, and addictive in the right way.</p>
+      </div>
+    </div>
+
+    <div id="stemModal" class="modal" role="dialog" aria-hidden="true" aria-labelledby="stemModalLabel" aria-modal="true">
+      <div class="modal-content">
+        <button class="modal-close" aria-label="Close">&times;</button>
+        <h4 id="stemModalLabel">STEM Community</h4>
+        <p>The STEM Community turns learning into a shared experience. Users don’t just consume knowledge — they create it. Students, learners, and curious minds post their own explanations, visuals, mini-research, or “Today I learned” insights in science, technology, engineering, and mathematics. Others can comment, improve, or expand on them. This creates peer-to-peer learning, critical thinking, and a culture where knowledge is respected, challenged, and refined — not blindly followed.</p>
+      </div>
+    </div>
+
+    <div id="researchModal" class="modal" role="dialog" aria-hidden="true" aria-labelledby="researchModalLabel" aria-modal="true">
+      <div class="modal-content">
+        <button class="modal-close" aria-label="Close">&times;</button>
+        <h4 id="researchModalLabel">Research Labs</h4>
+        <p>Research Labs are where Rafion X moves from learning to creation. Users can dive deeper into advanced topics, experiments, case studies, or guided mini-projects powered by AI. Whether it’s breaking down a scientific paper, exploring an engineering concept, or connecting ideas across disciplines, Research Labs train users to think like researchers, not passive consumers. This feature tackles misinformation at its root by teaching how knowledge is built, tested, and verified.</p>
+      </div>
+    </div>
+  </main>
+
+  <!-- Sticky CTA & Scroll-to-top -->
+  <div class="sticky-cta" aria-hidden="false">
+    <button class="bubble" id="stickyContact" aria-label="Request demo">Request Demo</button>
+    <div class="help" aria-hidden="true">Available for schools & projects</div>
+  </div>
+  <button class="to-top" id="toTop" aria-label="Scroll to top" title="Scroll to top">▲</button>
+
+  <footer role="contentinfo">
+    <div style="max-width:var(--max-width);margin:0 auto">
+      <p style="margin-bottom:8px">© 2025 Rafion Team — All rights reserved.</p>
+      <p style="color:var(--muted)"><a href="/privacy.html">Privacy Policy</a> · <a href="/terms.html">Terms</a> · <a href="/sitemap.xml">Sitemap</a></p>
+      <p style="margin-top:8px;color:var(--muted);font-size:13px">Built with care • Accessible navigation • Performance-minded</p>
+    </div>
+  </footer>
+
+  <!-- Scripts (all-in-one) -->
+  <script>
+    // Helpers
+    const $ = (s, ctx=document) => ctx.querySelector(s);
+    const $$ = (s, ctx=document) => Array.from(ctx.querySelectorAll(s));
+
+    /* --------------------------
+       Loading overlay
+       -------------------------- */
+    window.addEventListener('load', () => {
+      const loader = document.getElementById('loading');
+      if (loader) {
+        loader.style.opacity = '0';
+        setTimeout(() => { loader.setAttribute('aria-hidden', 'true'); loader.style.display='none'; }, 420);
+      }
+    });
+
+    /* --------------------------
+       Background canvas: subtle particles & lines
+       -------------------------- 
+    (function bgCanvas() {
+      const canvas = document.getElementById('bgCanvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      let w = canvas.width = innerWidth;
+      let h = canvas.height = innerHeight;
+      const DPR = Math.max(1, devicePixelRatio || 1);
+      canvas.width = w * DPR; canvas.height = h * DPR;
+      canvas.style.width = w + 'px'; canvas.style.height = h + 'px';
+      ctx.scale(DPR, DPR);
+
+      let particles = [];
+      const N = Math.min(120, Math.floor((w * h) / 90000));
+      for (let i=0;i<N;i++){
+        particles.push({
+          x: Math.random()*w,
+          y: Math.random()*h,
+          vx:(Math.random()-0.5)*0.35,
+          vy:(Math.random()-0.5)*0.35,
+          r:0.6 + Math.random()*2.2,
+          hue:190 + Math.random()*40
+        });
+      }
+
+      function draw(){
+        ctx.clearRect(0,0,w,h);
+        // faint overlay gradient
+        const g = ctx.createLinearGradient(0,0,w,h);
+        g.addColorStop(0,'rgba(0,0,0,0)');
+        g.addColorStop(1,'rgba(0,0,0,0.06)');
+        ctx.fillStyle = g;
+        ctx.fillRect(0,0,w,h);
+
+        // particles and lines
+        for (let i=0;i<particles.length;i++){
+          const p = particles[i];
+          p.x += p.vx; p.y += p.vy;
+          if (p.x < 0) p.x = w;
+          if (p.x > w) p.x = 0;
+          if (p.y < 0) p.y = h;
+          if (p.y > h) p.y = 0;
+
+          ctx.beginPath();
+          ctx.fillStyle = `hsla(${p.hue},85%,60%,0.12)`;
+          ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+          ctx.fill();
+
+          for (let j=i+1;j<particles.length;j++){
+            const q = particles[j];
+            const dx = p.x - q.x, dy = p.y - q.y;
+            const dist = Math.sqrt(dx*dx + dy*dy);
+            if (dist < 140){
+              ctx.beginPath();
+              ctx.strokeStyle = `hsla(${p.hue},85%,60%,${0.06*(1-dist/140)})`;
+              ctx.lineWidth = 1;
+              ctx.moveTo(p.x,p.y);
+              ctx.lineTo(q.x,q.y);
+              ctx.stroke();
+            }
+          }
+        }
+        requestAnimationFrame(draw);
+      }
+      draw();
+
+      let resizeTimer;
+      window.addEventListener('resize', () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+          w = canvas.width = innerWidth;
+          h = canvas.height = innerHeight;
+          canvas.width = w * DPR; canvas.height = h * DPR;
+          canvas.style.width = w + 'px'; canvas.style.height = h + 'px';
+          ctx.scale(DPR, DPR);
+        }, 120);
+      }, {passive:true});
+    })();a*/
+
+    /* --------------------------
+       Mobile menu toggling
+       -------------------------- */
+    (function mobileMenu() {
+      const btn = $('#hamburgerBtn');
+      const panel = $('#mobilePanel');
+      if (!btn || !panel) return;
+
+      function openPanel() {
+        panel.classList.add('show');
+        panel.setAttribute('aria-hidden','false');
+        btn.setAttribute('aria-expanded','true');
+        panel.querySelector('a')?.focus();
+        document.addEventListener('focusin', trapFocus);
+      }
+      function closePanel() {
+        panel.classList.remove('show');
+        panel.setAttribute('aria-hidden','true');
+        btn.setAttribute('aria-expanded','false');
+        btn.focus();
+        document.removeEventListener('focusin', trapFocus);
+      }
+      function trapFocus(e){
+        if (!panel.contains(e.target) && e.target !== btn) {
+          e.stopPropagation();
+          panel.querySelector('a')?.focus();
+        }
+      }
+
+      btn.addEventListener('click', () => {
+        const expanded = btn.getAttribute('aria-expanded') === 'true';
+        expanded ? closePanel() : openPanel();
+      });
+
+      panel.querySelectorAll('a').forEach(a => a.addEventListener('click', () => closePanel()));
+      window.addEventListener('keydown', (e) => { if (e.key==='Escape' && panel.classList.contains('show')) closePanel(); });
+    })();
+
+    /* --------------------------
+       Modal logic
+       -------------------------- */
+    (function modals() {
+      const cards = $$('.program-card');
+      const modals = $$('.modal');
+
+      function openModal(id) {
+        const modal = document.getElementById(id);
+        if (!modal) return;
+        modal.setAttribute('aria-hidden','false');
+        modal.style.display = 'flex';
+        const focusables = modal.querySelectorAll('button, [href], input, select, textarea, [tabindex]');
+        (focusables[0] || modal).focus();
+        document.body.style.overflow = 'hidden';
+      }
+      function closeModal(modal) {
+        if (!modal) return;
+        modal.setAttribute('aria-hidden','true');
+        modal.style.display = 'none';
+        document.body.style.overflow = '';
+      }
+
+      cards.forEach(c => {
+        c.addEventListener('click', () => openModal(c.dataset.modal));
+        c.addEventListener('keydown', (e) => { if (e.key==='Enter' || e.key===' ') { e.preventDefault(); openModal(c.dataset.modal); } });
+      });
+
+      $$('.modal-close').forEach(btn => btn.addEventListener('click', () => {
+        const parent = btn.closest('.modal'); closeModal(parent);
+      }));
+
+      window.addEventListener('click', (e) => {
+        modals.forEach(m => { if (m.getAttribute('aria-hidden')==='false' && e.target===m) closeModal(m); });
+      });
+      window.addEventListener('keydown', (e) => { if (e.key==='Escape') { modals.forEach(m => { if (m.getAttribute('aria-hidden')==='false') closeModal(m); }); }});
+    })();
+
+    /* --------------------------
+       Counters (IntersectionObserver)
+       -------------------------- */
+    (function counters() {
+      const els = $$('.counter');
+      els.forEach(el => el.textContent='0');
+      if ('IntersectionObserver' in window) {
+        const obs = new IntersectionObserver((entries, o) => {
+          entries.forEach(entry => {
+            if (!entry.isIntersecting) return;
+            const el = entry.target;
+            const target = Number(el.dataset.target) || 0;
+            const duration = 1200;
+            const start = performance.now();
+            (function step(now){
+              const t = Math.min(1, (now-start)/duration);
+              el.textContent = Math.floor(t*target);
+              if (t<1) requestAnimationFrame(step);
+            })(start);
+            o.unobserve(el);
+          });
+        }, {threshold:0.4});
+        els.forEach(e => obs.observe(e));
+      } else {
+        els.forEach(el => el.textContent = el.dataset.target || '0');
+      }
+    })();
+
+    /* --------------------------
+       Contact form: POST with mailto fallback
+       -------------------------- */
+    (function contactForm() {
+      const form = $('#contactForm');
+      if (!form) return;
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const fd = new FormData(form);
+        if (!fd.get('name') || !fd.get('email') || !fd.get('message')) {
+          alert('Παρακαλώ συμπλήρωσε όλα τα πεδία.');
+          return;
+        }
+        try {
+          const res = await fetch(form.action, { method: 'POST', body: fd });
+          if (res.ok) {
+            alert('Ευχαριστούμε! Το μήνυμά σου εστάλη.');
+            form.reset();
+            return;
+          }
+          throw new Error('server error');
+        } catch (err) {
+          const subject = encodeURIComponent('Contact from Rafion website');
+          const body = encodeURIComponent(`Name: ${fd.get('name')}\nEmail: ${fd.get('email')}\n\n${fd.get('message')}`);
+          window.location.href = `mailto:hello@rafion.example?subject=${subject}&body=${body}`;
+        }
+      });
+    })();
+
+    /* --------------------------
+       Scroll-to-top & sticky CTA behaviors
+       -------------------------- */
+    (function uiWidgets() {
+      const toTop = $('#toTop');
+      const sticky = $('.sticky-cta');
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 600) toTop.classList.add('show'); else toTop.classList.remove('show');
+      }, {passive:true});
+      toTop.addEventListener('click', () => window.scrollTo({top:0,behavior:'smooth'}));
+      $('#stickyContact')?.addEventListener('click', () => {
+        document.getElementById('contact')?.scrollIntoView({behavior:'smooth'});
+      });
+    })();
+
+    /* --------------------------
+       GSAP animations (hero, cards, floating shapes)
+       -------------------------- */
+    window.addEventListener('load', () => {
+      try {
+        if (window.gsap && window.ScrollTrigger) {
+          gsap.registerPlugin(ScrollTrigger);
+
+          // Hero entrance
+          const tl = gsap.timeline({defaults:{duration:0.9,ease:'power3.out'}});
+          tl.from('.badge',{y:12,opacity:0})
+            .from('#hero-heading',{y:18,opacity:0},'-=0.6')
+            .from('.lead',{y:12,opacity:0},'-=0.6')
+            .from('.hero-actions .btn',{y:10,opacity:0,stagger:0.06},'-=0.5')
+            .from('.mockup',{scale:0.98,rotationX:6,opacity:0, duration:1.1},'-=0.7');
+
+          // Mockup float & glow rotation
+          gsap.to('.mockup',{y:-8,rotationZ:0.2,duration:6,yoyo:true,repeat:-1,ease:'sine.inOut',delay:0.3});
+          gsap.to('.glow-ring',{rotation:360,duration:50,repeat:-1,ease:'none'});
+
+          // floating svgs small motions
+          gsap.utils.toArray('.floating-shapes svg').forEach((el, i) => {
+            gsap.to(el, {y: (i%2?8:-8), x: (i%3?6:-6), duration:6 + i, repeat:-1, yoyo:true, ease:'sine.inOut', delay: i*0.2});
+          });
+
+          // Reveal cards and program cards
+          gsap.utils.toArray('.card, .program-card').forEach((el, i) => {
+            gsap.from(el, {
+              scrollTrigger: { trigger: el, start: "top 85%" },
+              y: 18, opacity: 0, duration: 0.9, ease: "power3.out", delay: i*0.04
+            });
+            el.addEventListener('mouseenter', () => gsap.to(el, {scale:1.02, boxShadow: "0 30px 80px rgba(0,191,255,0.06)", duration:0.28}));
+            el.addEventListener('mouseleave', () => gsap.to(el, {scale:1, boxShadow: "0 10px 30px rgba(0,0,0,0.6)", duration:0.28}));
+          });
+
+          // Program micro-motions
+          gsap.utils.toArray('.program-card').forEach((el, idx) => {
+            gsap.to(el, {y: (idx%2?6:-6), duration: 6 + idx, repeat:-1, yoyo:true, ease:"sine.inOut", delay: idx * 0.35});
+          });
+
+          // Footer reveal
+          gsap.from('footer', {scrollTrigger:{trigger:'footer',start:'top 90%'}, y:18, opacity:0, duration:0.9, ease:'power3.out'});
+        }
+      } catch (e) {
+        console.warn('GSAP error', e);
+      }
+    });
+
+    /* --------------------------
+       Keyboard focus detection for visible outlines
+       -------------------------- */
+    (function focusOutline(){
+      function handleFirstTab(e){
+        if (e.key === 'Tab') {
+          document.documentElement.classList.add('user-is-tabbing');
+          window.removeEventListener('keydown', handleFirstTab);
+        }
+      }
+      window.addEventListener('keydown', handleFirstTab);
+    })();
+
+    /* --------------------------
+       Accessibility: smooth internal links
+       -------------------------- */
+    (function smoothAnchors(){
+      document.querySelectorAll('a[href^="#"]').forEach(a => {
+        a.addEventListener('click', function(e){
+          const href = this.getAttribute('href');
+          if (!href || href === '#') return;
+          const target = document.querySelector(href);
+          if (target) {
+            e.preventDefault();
+            target.scrollIntoView({behavior:'smooth'});
+          }
+        });
+      });
+    })();
+
+    /* --------------------------
+       Performance tip: Lazy-load heavy resources comment
+       -------------------------- */
+    // NOTE: For production, consider:
+    // - Extracting CSS/JS into separate files and serving with long cache headers
+    // - Using responsive srcset images or inline SVG for mockups
+    // - Adding real favicon and Open Graph images
+    // - Replacing placeholder video/image paths with optimized media
+
+    /* --------------------------
+       Analytics placeholder (replace with your analytics snippet)
+       -------------------------- */
+    // Example: (function(){ /* insert analytics script here */ })();
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+<script>
+(function(){
+  emailjs.init("YOUR_PUBLIC_KEY");
+})();
+</script>
+  
+</body>
+</html>
