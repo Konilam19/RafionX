@@ -530,7 +530,13 @@ window.addEventListener('resize',()=>{w=canvas.width=window.innerWidth; h=canvas
         <p class="lead">Empowering curious students with research-backed tools — Focus Mode, Learn Feed and Research Labs. Build, measure and iterate faster.</p>
         <div class="hero-actions" role="group" aria-label="Hero actions">
           <button class="btn btn-primary" id="learnMoreBtn" aria-controls="learn-more">Learn More</button>
-          <button class="btn btn-ghost" id="demoBtn">Request Demo</button>
+          <button id="demoBtn">Request Demo</button>
+
+<script>
+  document.getElementById("demoBtn").addEventListener("click", function () {
+    alert("The demo is unavailable at the moment. Please check back later.");
+  });
+</script>
         </div>
       </div>
 
@@ -746,6 +752,8 @@ window.addEventListener('resize',()=>{w=canvas.width=window.innerWidth; h=canvas
   <!-- Sticky CTA & Scroll-to-top -->
   <div class="sticky-cta" aria-hidden="false">
     <button class="bubble" id="stickyContact" aria-label="Request demo">Request Demo</button>
+
+
     <div class="help" aria-hidden="true">Available for schools & projects</div>
   </div>
   <button class="to-top" id="toTop" aria-label="Scroll to top" title="Scroll to top">▲</button>
